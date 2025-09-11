@@ -1,0 +1,238 @@
+@media (min-width: 100px){
+    .members {
+        display: grid;
+        justify-content: center;
+        align-content: center;
+        grid-template-columns: repeat(1, 1fr);
+        gap: 2%;
+      }
+}
+
+.model-title
+{
+    text-align: center;
+    margin: 100px auto auto 0;
+    font-size: 50px;
+    color: #272c60;
+}
+
+.divider
+{
+    width: 75px;
+    height: 4px;
+    background-color: #272c60;
+    position: relative;
+    margin: 20px auto 60px;
+}
+.gabunganPoto{
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+}
+
+.bawah{
+    position:relative;
+    margin-left: 18%;
+}
+.members {
+  display: grid;
+  justify-content: center;
+  align-content: center;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2%;
+}
+
+.member:nth-child(4),
+.member:nth-child(5) {
+  grid-row: 2;
+  margin-left: 20px; /* Sesuaikan dengan jumlah margin yang diinginkan */
+}
+
+.member {
+  margin: 0 auto;
+  border-radius: 10px;
+  
+  padding: 0;
+  height: 400px;
+  overflow: hidden;
+}
+
+.member:hover
+{
+    transform: scale(1.01);
+}
+
+#model3 .member
+{
+    margin: 1% 1%;
+    border-radius: 1rem;
+    width: 30rem;
+    padding: 40px 0;
+    height: 39rem;
+    background-color: #fff;
+    transition: all 1s;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+}
+
+#model3 .member::after
+{
+    position: absolute;
+    top: 0;
+    left: 0;
+    content: "";
+    width: 0;
+    height: 20px;
+    transition: all 1s;
+    background: rgba(8,61,119);
+}
+
+#model3 .member::before
+{
+    position: absolute;
+    top: 0;
+    right: 0;
+    content: "";
+    width: 0;
+    height: 20px;
+    transition: all 1s;
+    background: rgba(8,61,119);
+}
+.social-media img{
+    width:10%;
+    background-image: none;
+    margin-left:45%;
+}
+#model3 img
+{
+    border-top-left-radius: 10%;
+    border-bottom-right-radius: 10%;
+    transition: all 1s;
+}
+
+#model3 .description h1
+{
+    
+    margin-top: 8%;
+    margin-bottom: 2%;
+    color: rgba(8,61,119);
+    text-align: center;
+    font-size: 20px;
+    font-weight:700;
+
+}
+
+#model3 .description h2
+{
+    text-algin:center;
+    font-family: 'Poppins';
+    text-align: center;
+    color: #F21B3F;
+    font-weight: 600;
+    font-size: 17px;
+    margin-top:1%;
+}
+
+#model3 .description p
+{
+    color: rgba(8,61,119);
+    text-align: center;
+    margin-top: 2%;
+    padding: 0 5% 0 5%;
+    font-weight:500;
+}
+
+#model3 .descriptionatas h1
+{
+    
+    margin-top: 8%;
+    margin-bottom: 2%;
+    color: rgba(8,61,119);
+    text-align: center;
+    font-size: 20px;
+    font-weight:700;
+
+}
+
+#model3 .descriptionatas h2
+{
+    text-algin:center;
+    font-family: 'Poppins';
+    text-align: center;
+    color: #F21B3F;
+    font-weight: 600;
+    font-size: 17px;
+    margin-top:1%;
+}
+
+#model3 .descriptionatas p
+{
+    color: rgba(8,61,119);
+    text-align: center;
+    margin-top: 2%;
+    padding: 0 5% 0 5%;
+    font-weight:500;
+}
+
+#model3 .social-media
+{
+    position: absolute;
+    background-color: rgba(8,61,119);
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    padding: 1.5% 0;
+    justify-content: center;
+    transition: all 1s;
+    width: 0;
+    opacity: 0;
+    border-radius: 0 0 15px 15px;
+    color: ##8cc6ff;
+}
+
+#model3 .description .social-media svg
+{
+    font-size: 30px;
+    transition: all 1s;
+}
+
+#model3 .member:hover .social-media
+{
+    width: 100%;
+    opacity: 1;
+}
+
+#model3 .member:hover
+{
+    background-color: #8cc6ff;
+    transform: scale(1.01);
+}
+
+#model3 .member:hover img
+{
+    transform: scale(1.1);
+    border: 2px solid rgba(8,61,119);
+}
+
+#model3 .description .social-media svg:hover
+{
+    transform: scale(1.1);
+    color: #F21B3F;
+}
+
+#model3 .member:hover::before
+{
+    width: 50%;
+}
+
+#model3 .member:hover::after
+{
+    width: 50%;
+}
+
