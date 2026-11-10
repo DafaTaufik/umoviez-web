@@ -4,6 +4,7 @@ import Credit from "./Credit";
 import Card from "./Card";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+
 const Detail = () => {
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
@@ -17,72 +18,115 @@ const Detail = () => {
   const creditLink = searchParams.get("creditLink");
 
   const handleButtonClick = () => {
-    // Logic for button click action
-    // For example, you can open the trailer link in a new tab/window
     window.open(`https://www.youtube.com/watch?v=${videoLink}`, "_blank");
   };
-  const [activeMenu, setActiveMenu] = useState("Dashboard"); // State untuk menu aktif
+
+  const [activeMenu, setActiveMenu] = useState("Dashboard");
   const navigate = useNavigate();
+  
   const scrollToDashboard = () => {
-    setActiveMenu("Dashboard"); // Set menu aktif ke "Dashboard"
+    setActiveMenu("Dashboard");
     navigate('/');
   };
 
-
-
   return (
-    <div className="relative flex flex-row h-screen w-screen" style={{ textAlign: "center", color: "white" }}>
-     <button
-  className="font-bold inline-block mt-2 ml-2 px-4 py-2 bg-gray-500 text-white no-underline cursor-pointer border-none rounded-full text-xl relative z-10 h-12 transition-colors duration-300 hover:bg-blue-800"
-  onClick={scrollToDashboard}
->
-  Back
-</button>
-
-      <div className=" ml-20 flex flex-row mt-44">
-        {posterPath && (
-          <div className=" mr-10 top :0 inline-block" >
-            <img 
-              style={{ maxWidth: "400px", marginRight: "20px" }}
-              src={`${process.env.REACT_APP_BASEIMGURL}/${posterPath}`}
-              alt="Movie Poster"
-              className="rounded-3xl"
-            />
-          </div>
-        )}
-        <div className="text-left w-2/3">
-        
-          
-          {title && <h2 className="text-7xl font-bold" style={{ marginTop: 0, marginBottom: "5px" }}>{title}</h2>}
-          {date && <p className="mt-4 text-3xl font-bold" style={{ marginTop: 0 }}>Release Date: {date}</p>}
-          {rating && <p className="mt-2 text-3xl font-bold">Rating: {rating}</p>}
-          {overview && <p  className=" mt-9 text-2xl mb-6" >{overview}</p>}
-          {videoLink && (
-            <button
-            className="font-bold inline-block px-4 py-2  bg-gray-500 text-white no-underline cursor-pointer border-none rounded-full text-xl relative z-10 h-12 transition-colors duration-300 hover:bg-blue-800"
-            onClick={handleButtonClick}
-          >
-            Watch Trailer
-          </button>
-            
-          )}
-        </div>
-      </div>
+    <div className="relative min-h-screen w-full bg-gray-900" style={{ color: "white" }}>
+      {/* Background Image */}
       {background && (
-        <img
+        <div 
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            width: "100%",
-            height: "100%",
-            opacity: 0.09,
+            backgroundImage: `url(${process.env.REACT_APP_BASEIMGURL}${background})`,
+            opacity: 0.2,
           }}
-          src={`${process.env.REACT_APP_BASEIMGURL}${background}`}
-          alt="Background Image"
         />
       )}
       
+      {/* Overlay untuk membuat background lebih gelap */}
+      <div className="absolute inset-0 bg-gradient-to-r from-black via-black to-transparent bg-opacity-80" />
+      
+      {/* Content */}
+      <div className="relative z-10 h-full">
+        {/* Back Button */}
+        <div className="px-6 py-6">
+          <button
+            className="inline-flex items-center gap-2 px-6 py-3 bg-gray-600 hover:bg-blue-800 text-white font-bold rounded-full transition-all duration-300 shadow-xl border-2 border-transparent"
+            onClick={scrollToDashboard}
+          >
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+            </svg>
+            Back to Dashboard
+          </button>
+        </div>
+
+        {/* Main Content */}
+        <div className="flex flex-col lg:flex-row h-full px-6 pb-6">
+          {/* Poster Image */}
+          {posterPath && (
+            <div className="flex-shrink-0 mb-6 lg:mb-0 lg:mr-12">
+              <img 
+                src={`${process.env.REACT_APP_BASEIMGURL}/${posterPath}`}
+                alt="Movie Poster"
+                className="w-72 lg:w-80 h-auto rounded-xl shadow-2xl mx-auto lg:mx-0"
+              />
+            </div>
+          )}
+
+          {/* Movie Details */}
+          <div className="flex-1 flex flex-col justify-center max-w-none">
+            {title && (
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
+                {title}
+              </h1>
+            )}
+            
+            <div className="flex flex-col sm:flex-row gap-4 mb-8">
+              {date && (
+                <div className="bg-gray-800 bg-opacity-80 px-6 py-3 rounded-lg backdrop-blur-sm">
+                  <span className="text-gray-300 text-sm block">Release Date</span>
+                  <p className="text-xl font-semibold">{date}</p>
+                </div>
+              )}
+              
+              {rating && (
+                <div className="bg-gray-800 bg-opacity-80 px-6 py-3 rounded-lg backdrop-blur-sm">
+                  <span className="text-gray-300 text-sm block">Rating</span>
+                  <p className="text-xl font-semibold text-yellow-400 flex items-center gap-1">
+                    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                    </svg>
+                    {rating}
+                  </p>
+                </div>
+              )}
+            </div>
+
+            {overview && (
+              <div className="mb-8">
+                <h3 className="text-2xl font-semibold mb-4 text-gray-200">Overview</h3>
+                <p className="text-lg leading-relaxed text-gray-100 max-w-4xl">
+                  {overview}
+                </p>
+              </div>
+            )}
+
+            {videoLink && (
+              <div>
+                <button
+                  className="inline-flex items-center gap-3 px-8 py-4 bg-gray-600 hover:bg-blue-800 text-white font-bold rounded-full text-lg transition-all duration-300 shadow-xl border-2 border-transparent transform hover:scale-105"
+                  onClick={handleButtonClick}
+                >
+                  <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clipRule="evenodd" />
+                  </svg>
+                  Watch Trailer
+                </button>
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
