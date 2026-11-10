@@ -16,7 +16,7 @@ const NowMovie = () => {
     const fetchNowMovie = async () => {
       try {
         const response = await axios.get(
-          "https://api.themoviedb.org/3/movie/now_playing?api_key=REDACTED"
+          `https://api.themoviedb.org/3/movie/now_playing?api_key=${process.env.REACT_APP_APIKEY}`
         );
         setNowMovies(response.data.results);
       } catch (error) {
@@ -33,7 +33,7 @@ const NowMovie = () => {
         nowMovies.map((movie) => {
           return axios
             .get(
-              `https://api.themoviedb.org/3/movie/${movie.id}/videos?api_key=REDACTED`
+              `https://api.themoviedb.org/3/movie/${movie.id}/videos?api_key=${process.env.REACT_APP_APIKEY}`
             )
             .then((response) => response.data.results[0]?.key || null)
             .catch((error) => {

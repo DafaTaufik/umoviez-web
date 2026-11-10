@@ -35,7 +35,7 @@ const Search = () => {
           popularMovies.map((movie) => {
             
             return axios
-              .get(`https://api.themoviedb.org/3/movie/${movie.id}/videos?api_key=REDACTED`)
+              .get(`https://api.themoviedb.org/3/movie/${movie.id}/videos?api_key=${process.env.REACT_APP_APIKEY}`)
               .then((response) => response.data.results[0]?.key || null)
               .catch((error) => {
                 console.log(error);

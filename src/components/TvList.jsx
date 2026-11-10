@@ -17,7 +17,7 @@ const TvList = () => {
     const fetchPopularMovies = async () => {
       try {
         const response = await axios.get(
-          "https://api.themoviedb.org/3/tv/popular?api_key=REDACTED"
+          `https://api.themoviedb.org/3/tv/popular?api_key=${process.env.REACT_APP_APIKEY}`
         );
         setPopularMovies(response.data.results);
       } catch (error) {
@@ -47,7 +47,7 @@ const TvList = () => {
             
           return axios
             .get(
-              `https://api.themoviedb.org/3/tv/${movie.id}/videos?api_key=REDACTED`
+              `https://api.themoviedb.org/3/tv/${movie.id}/videos?api_key=${process.env.REACT_APP_APIKEY}`
             )
             .then((response) => response.data.results[0]?.key || null)
             .catch((error) => {
