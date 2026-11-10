@@ -3,7 +3,7 @@ import TopRated from "../list/TopRatedMovies";
 import UpComing from "../list/UpComing";
 import NowMovie from "../list/NowMovie";
 import Time from "./Time";
-import { getMovieList, searchMovie, getTopRatedMovieList, getUpcomingMovieList, getNowMovieList } from "../api";
+import { getMovieList, getTopRatedMovieList, getUpcomingMovieList, getNowMovieList } from "../api";
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import Sidebar from "./Sidebar";
@@ -65,13 +65,6 @@ const Main = () => {
       setNowMovies(result);
     });
   }, []);
-
-  const search = async (q) => {
-    if (q.length >= 3) {
-      const query = await searchMovie(q);
-      setUpComingdMovies(query.results);
-    }
-  };
 
   return (
     <div className="h-screen w-full ">

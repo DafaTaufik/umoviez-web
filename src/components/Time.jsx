@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { getTime } from '../api';
-import axios from "axios";
 
 const Time = () => {
   const [time, setTime] = useState({});

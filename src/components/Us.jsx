@@ -15,7 +15,7 @@ const Us = () => {
         <div className="gabunganPoto">
           <div className="members flex justify-center align-middle ">
             <div className="member">
-              <img width={320} height={320} src={gt} />
+              <img width={320} height={320} src={gt} alt="Gilbert Tiovan" />
               <div className="descriptionatas">
                 <h1 className="">Gilbert Tiovan</h1>
                 <h2>00000066811</h2>
@@ -28,7 +28,7 @@ const Us = () => {
               </div>
             </div>
             <div className="member">
-              <img width={320} height={320} src={citop} />
+              <img width={320} height={320} src={citop} alt="Christopher Andrew Radharjo" />
               <div className="descriptionatas">
                 <h1>Christopher Andrew Radharjo</h1>
                 <h2>00000066460</h2>
@@ -41,7 +41,7 @@ const Us = () => {
               </div>
             </div>
             <div className="member">
-              <img width={320} height={320} src={yori} />
+              <img width={320} height={320} src={yori} alt="Yohanes Riangto" />
               <div className="descriptionatas">
                 <h1>Yohanes Riangto</h1>
                 <h2>00000065501</h2>
@@ -56,7 +56,7 @@ const Us = () => {
           </div>
           <div className="members bawah mt-5">
             <div className="member">
-              <img width={300} height={300} src={data} />
+              <img width={300} height={300} src={data} alt="Dafa Taufik Al Latief" />
               <div className="description">
                 <h1>Dafa Taufik Al Latief</h1>
                 <h2>00000067476</h2>
@@ -69,7 +69,7 @@ const Us = () => {
               </div>
             </div>
             <div className="member">
-              <img width={300} height={300} src={damu} />
+              <img width={300} height={300} src={damu} alt="Daffa Muflih Purnama" />
               <div className="description">
                 <h1>Daffa Muflih Purnama</h1>
                 <h2>00000067437</h2>

@@ -1,10 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import Card from "../components/Card";
-import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { searchMovie } from "../api";
 import { getTvList } from "../api";
 import { useNavigate } from "react-router-dom";
 import { searchTv } from "../api";
@@ -29,7 +26,7 @@ const TvList = () => {
     if (q.length >= 3) {
       const query = await searchTv(q);
       setPopularMovies(query.results);
-    } else if (q.length == 0) {
+    } else if (q.length === 0) {
       // Reset popularMovies to the initially rendered movies
       setPopularMovies([]);
       getTvList().then((result) => {
@@ -79,7 +76,7 @@ const TvList = () => {
             <p className="text-gray-300">Movie Rating: {movie.vote_average}</p>
             {link && (
               <div className="mt-4">
-                <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" role="button" onClick={() => window.open(`https://youtube.com/watch?v=${link}`, "_blank")}>
+                <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick={() => window.open(`https://youtube.com/watch?v=${link}`, "_blank")}>
                   Go to Youtube
                 </button>
               </div>
@@ -90,48 +87,12 @@ const TvList = () => {
     });
   };
 
-  const settings = {
-    dots: true,
-    infinite: true,
-    speed: 300,
-    slidesToShow: 8,
-    slidesToScroll: 8,
-    initialSlide: 0,
-    responsive: [
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 5,
-          slidesToScroll: 5,
-          infinite: true,
-          dots: true,
-        },
-      },
-      {
-        breakpoint: 600,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2,
-          initialSlide: 2,
-        },
-      },
-      {
-        breakpoint: 480,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-        },
-      },
-    ],
-  };
-
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-900 px-6 md:px-12 pb-10">
       <header className="text-center w-full max-w-[1600px]">
         <h1 className="text-3xl text-white mb-6">SEARCH TV SHOW</h1>
         <input placeholder="Search for movies..." className="border border-gray-300 rounded-md p-3 w-80 text-gray-800 focus:outline-none" onChange={({ target }) => search(target.value)} />
-        <h2 className="text-2xl mt-8 mb-4 text-white"></h2>
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 overflow-y-auto">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 overflow-y-auto">
           <PopularMovie />
         </div>
       </header>

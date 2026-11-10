@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import logo from "./assets/logo.png";
 import ChartFillIcon from "./assets/Chart_fill.png";
 import ChatIcon from "./assets/Chat.png";

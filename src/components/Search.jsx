@@ -2,7 +2,6 @@ import { getMovieList, searchMovie } from "../api";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import React from "react";
-import Sidebar from "./Sidebar";
 import { useNavigate } from "react-router-dom";
 
 const Search = () => {
@@ -13,10 +12,6 @@ const Search = () => {
     navigate(
       `/detail?poster=${encodeURIComponent(movie.poster_path)}&title=${encodeURIComponent(movie.title)}&video=${encodeURIComponent(videoLink)}&rating=${encodeURIComponent(movie.vote_average)}&overview=${encodeURIComponent(movie.overview)}&date=${encodeURIComponent(movie.release_date)}&background=${encodeURIComponent(movie.backdrop_path)}&id=${encodeURIComponent(movie.id)}`,
     );
-  };
-
-  const handleTrailerClick = (e) => {
-    e.stopPropagation();
   };
 
   useEffect(() => {
@@ -61,7 +56,7 @@ const Search = () => {
             <p className="text-gray-300">Movie Rating: {movie.vote_average}</p>
             {link && (
               <div className="mt-4">
-                <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" role="button" onClick={() => window.open(`https://youtube.com/watch?v=${link}`, "_blank")}>
+                <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick={() => window.open(`https://youtube.com/watch?v=${link}`, "_blank")}>
                   Go to Youtube
                 </button>
               </div>
@@ -76,7 +71,7 @@ const Search = () => {
     if (q.length >= 3) {
       const query = await searchMovie(q);
       setPopularMovies(query.results);
-    } else if (q.length == 0) {
+    } else if (q.length === 0) {
       // Reset popularMovies to the initially rendered movies
       setPopularMovies([]);
       getMovieList().then((result) => {
@@ -90,7 +85,6 @@ const Search = () => {
       <header className="text-center w-full max-w-[1600px]">
         <h1 className="text-3xl text-white mb-6">SEARCH MOVIE</h1>
         <input placeholder="Search for movies..." className="border border-gray-300 rounded-md p-3 w-80 text-gray-800 focus:outline-none" onChange={({ target }) => search(target.value)} />
-        <h2 className="text-2xl mt-8 mb-4 text-white"></h2>
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 overflow-y-auto">
           <PopularMovie />
         </div>

@@ -1,9 +1,6 @@
 import React from "react";
 import { useLocation } from "react-router-dom";
-import Credit from "./Credit";
-import Card from "./Card";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
 
 const Detail = () => {
   const location = useLocation();
@@ -15,17 +12,14 @@ const Detail = () => {
   const overview = searchParams.get("overview");
   const date = searchParams.get("date");
   const background = searchParams.get("background");
-  const creditLink = searchParams.get("creditLink");
 
   const handleButtonClick = () => {
     window.open(`https://www.youtube.com/watch?v=${videoLink}`, "_blank");
   };
 
-  const [activeMenu, setActiveMenu] = useState("Dashboard");
   const navigate = useNavigate();
   
   const scrollToDashboard = () => {
-    setActiveMenu("Dashboard");
     navigate('/');
   };
 
