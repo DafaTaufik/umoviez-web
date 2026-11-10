@@ -6,6 +6,7 @@ import NowMovie from '../list/NowMovie';
 import Time from './Time';
 import { getMovieList, searchMovie, getTopRatedMovieList, getUpcomingMovieList, getNowMovieList,} from "../api";
 import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import Sidebar from './Sidebar';
 import Slides from './Slides';
 import logo from './assets/LGOI.png';
@@ -16,6 +17,32 @@ const Main = () => {
   const [topratedMovies, setTopRatedMovies] = useState([]);
   const [upcomingMovies , setUpComingdMovies] = useState([])
   const[nowMovies , setNowMovies] = useState([])
+  const { state } = useLocation();
+
+  // Datang dari halaman lain lewat menu sidebar (mis. About Us -> Now Playing): langsung ke section-nya.
+  // Tinggi halaman berubah saat list film selesai dimuat, jadi posisi diulang sampai layout stabil
+  // atau pengguna mulai scroll sendiri.
+  useEffect(() => {
+    const target = state?.scrollTo;
+    const section = target && document.getElementById(target);
+    if (!section) return undefined;
+
+    const scrollToSection = () => section.scrollIntoView();
+    scrollToSection();
+
+    const observer = new ResizeObserver(scrollToSection);
+    observer.observe(section.parentElement);
+    const stop = () => observer.disconnect();
+    const timer = setTimeout(stop, 3000);
+    const events = ["wheel", "touchstart", "keydown", "mousedown"];
+    events.forEach((event) => window.addEventListener(event, stop, { once: true }));
+
+    return () => {
+      clearTimeout(timer);
+      stop();
+      events.forEach((event) => window.removeEventListener(event, stop));
+    };
+  }, [state]);
 
 
   useEffect(() => {

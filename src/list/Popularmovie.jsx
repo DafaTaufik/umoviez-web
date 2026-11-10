@@ -4,7 +4,7 @@ import Card from "../components/Card";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
-import sliderSettings from "./sliderSettings";
+import { useSliderSettings } from "./sliderSettings";
 
 
 
@@ -49,16 +49,18 @@ const PopularMovie = () => {
     fetchVideoLinks();
   }, [popularMovies]);
 
-  const settings = sliderSettings;
+  const [sliderRef, settings] = useSliderSettings();
 
   return (
-    <Slider className="kotak mx-auto w-full" {...settings}>
+    <div ref={sliderRef}>
+      <Slider className="kotak mx-auto w-full" {...settings}>
       {popularMovies.map((movie, i) => (
         <div className="" key={i}>
           <Card movie={movie} videoLink={videoLinks[i]} />
         </div>
       ))}
-    </Slider>
+      </Slider>
+    </div>
   );
 };
 

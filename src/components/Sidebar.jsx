@@ -11,11 +11,15 @@ import SettingIcon from "./assets/Setting.png";
 import More from "./assets/mores.png";
 import { useLocation, useNavigate } from "react-router-dom";
 
+// id section di halaman utama -> menu sidebar
+const SECTION_MENUS = { upcoming: "Up Coming", toprated: "Top Rated", nowplaying: "Now Playing" };
+
 const Sidebar = () => {
   const [open, setOpen] = useState(false);
-  const [activeMenu, setActiveMenu] = useState("Dashboard"); // State untuk menu aktif
   const navigate = useNavigate();
-  const { pathname } = useLocation();
+  const { pathname, state } = useLocation();
+  // Datang dari halaman lain lewat klik section (mis. About Us -> Now Playing): menu section itu langsung aktif
+  const [activeMenu, setActiveMenu] = useState(SECTION_MENUS[state?.scrollTo] || "Dashboard");
   // Halaman dengan route sendiri menentukan menu aktif dari URL, sisanya dari state (scroll section)
   const routeMenu = { "/search": "Search", "/aboutus": "About Us", "/tv": "TV Series" }[pathname.toLowerCase()];
   const currentMenu = routeMenu || activeMenu;
@@ -44,27 +48,25 @@ const Sidebar = () => {
     navigate("/Tv");
   };
 
-  const scrollToUpComing = () => {
-    setActiveMenu("Up Coming"); // Set menu aktif ke "Up Coming"
-    const sectionElement = document.getElementById("upcoming");
-    sectionElement.scrollIntoView({ behavior: "smooth" });
+  // Di halaman utama: scroll ke section. Di halaman lain: pindah ke halaman utama lalu scroll (ditangani Main)
+  const goToSection = (menu, id) => {
+    setActiveMenu(menu);
+    if (pathname === "/") {
+      document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+    } else {
+      navigate("/", { state: { scrollTo: id } });
+    }
   };
+
+  const scrollToUpComing = () => goToSection("Up Coming", "upcoming");
 
   const scrollToDashboard = () => {
     setActiveMenu("Dashboard"); // Set menu aktif ke "Dashboard"
     navigate("/");
   };
 
-  const scrollToTopRated = () => {
-    setActiveMenu("Top Rated"); // Set menu aktif ke "Top Rated"
-    const sectionElement = document.getElementById("toprated");
-    sectionElement.scrollIntoView({ behavior: "smooth" });
-  };
-  const scrollToNowPlaying = () => {
-    setActiveMenu("Now Playing"); // Set menu aktif ke "Top Rated"
-    const sectionElement = document.getElementById("nowplaying");
-    sectionElement.scrollIntoView({ behavior: "smooth" });
-  };
+  const scrollToTopRated = () => goToSection("Top Rated", "toprated");
+  const scrollToNowPlaying = () => goToSection("Now Playing", "nowplaying");
 
   return (
     <div className="aside">
