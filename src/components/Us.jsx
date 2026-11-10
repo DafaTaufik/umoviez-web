@@ -4,7 +4,7 @@ import gt from "./assets/gilbert.jpg";
 import citop from "./assets/citops.jpg";
 import damu from "./assets/damu.jpg";
 import yori from "./assets/yori.jpg";
-import InstagramIcon from "./assets/igj.png";
+import InstagramIcon from "./assets/ig.png";
 
 const Us = () => {
   return (

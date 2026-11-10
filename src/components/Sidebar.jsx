@@ -1,14 +1,13 @@
 import { useEffect, useState } from "react";
-import logo from "./assets/LGOI.png";
+import logo from "./assets/logo.png";
 import ChartFillIcon from "./assets/Chart_fill.png";
 import ChatIcon from "./assets/Chat.png";
 import UserIcon from "./assets/User.png";
 import CalendarIcon from "./assets/Calendar.png";
 import SearchIcon from "./assets/Search.png";
 import ChartIcon from "./assets/Chart.png";
-import FolderIcon from "./assets/Folder.png";
-import SettingIcon from "./assets/Setting.png";
-import More from "./assets/mores.png";
+import AboutUSIcon from "./assets/ic_aboutus.png";
+import More from "./assets/more.png";
 import { useLocation, useNavigate } from "react-router-dom";
 
 // id section di halaman utama -> menu sidebar
@@ -30,7 +29,7 @@ const Sidebar = () => {
     { title: "Top Rated", src: ChartIcon },
     { title: "Up Coming", src: CalendarIcon },
     { title: "Now Playing", src: UserIcon },
-    { title: "About Us", src: FolderIcon, gap: true },
+    { title: "About Us", src: AboutUSIcon, gap: true },
   ];
 
   const handleSearchClick = () => {
