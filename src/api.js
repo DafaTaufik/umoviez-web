@@ -41,6 +41,10 @@ export const getMovieList = async () => {
         return movie.data.results
         }
     
+export const getTrendingMovieList = async () => {
+    const trending = await axios.get(`${baseUrl}/trending/movie/week?api_key=${apiKey}`);
+    return trending.data.results
+}
 export const getTime = async () => {
     const time = await axios.get ('https://timeapi.io/api/Time/current/zone?timeZone=ASIA/Jakarta');
     return time.data

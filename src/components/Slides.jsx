@@ -1,88 +1,92 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import { Autoplay, Pagination, Navigation } from "swiper";
-import jImage from "./BacgroundMV/j.jpg";
-import a from "./BacgroundMV/1.jpg";
-import b from "./BacgroundMV/2.jpg";
-import c from "./BacgroundMV/3.jpg";
-import d from "./BacgroundMV/4.jpg";
-import e from "./BacgroundMV/5.jpg";
-import f from "./BacgroundMV/6.jpg";
-import g from "./BacgroundMV/7.jpg";
+import { getTrendingMovieList } from "../api";
+
+const BACKDROP_URL = (process.env.REACT_APP_BASEIMGURL || "").trim().replace(/\/w\d+$/, "/w1280");
+
+const arrowClass =
+  "absolute top-1/2 z-10 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full " +
+  "bg-black/30 text-white opacity-0 ring-1 ring-white/20 backdrop-blur-md transition " +
+  "duration-300 hover:scale-110 hover:bg-white/90 hover:text-gray-900 " +
+  "group-hover:opacity-100 focus-visible:opacity-100 disabled:cursor-default disabled:opacity-0";
+
+const Chevron = ({ direction }) => (
+  <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <path d={direction === "left" ? "M15 5l-7 7 7 7" : "M9 5l7 7-7 7"} />
+  </svg>
+);
+
 export default function Slides() {
+  const [movies, setMovies] = useState([]);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    getTrendingMovieList().then((result) => {
+      setMovies(result.filter((movie) => movie.backdrop_path).slice(0, 8));
+    });
+  }, []);
+
+  const openDetail = (movie) => {
+    navigate(
+      `/detail?poster=${encodeURIComponent(movie.poster_path)}&title=${encodeURIComponent(movie.title)}&video=&rating=${encodeURIComponent(movie.vote_average)}&overview=${encodeURIComponent(movie.overview)}&date=${encodeURIComponent(movie.release_date)}&background=${encodeURIComponent(movie.backdrop_path)}&id=${encodeURIComponent(movie.id)}`,
+    );
+  };
+
+  if (movies.length === 0) {
+    return <div className="mx-auto mb-6 aspect-[21/9] w-[92%] animate-pulse rounded-2xl bg-white/10" />;
+  }
+
   return (
-    <div className="relative">
-      <Swiper
-        spaceBetween={50}
-        centeredSlides={true}
-        autoplay={{
-          delay: 6000,
-          disableOnInteraction: false,
-        }}
-        pagination={{
-          clickable: true,
-        }}
-        navigation={{
-          nextEl: ".swiper-button-next",
-          prevEl: ".swiper-button-prev",
-        }}
-        modules={[Autoplay, Pagination, Navigation]}
-        className="mySwiper relative"
-      >
-        <SwiperSlide style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-          <div className="w-3/4 mr-20 rounded-lg">
-            <img className="kocak mx-auto w-5/6" src={jImage} alt="gambar" />
-          </div>
-        </SwiperSlide>
-        <SwiperSlide style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-          <div className="w-3/4 mr-20 rounded-lg">
-            <img className="kocak mx-auto w-5/6" src={a} alt="gambar" />
-          </div>
-        </SwiperSlide>
+    <div className="mx-auto mb-6 w-[92%]">
+      <div className="group relative">
+        <button className={`hero-prev left-4 ${arrowClass}`} aria-label="Sebelumnya">
+          <Chevron direction="left" />
+        </button>
+        <button className={`hero-next right-4 ${arrowClass}`} aria-label="Berikutnya">
+          <Chevron direction="right" />
+        </button>
 
-        <SwiperSlide style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-          <div className="w-3/4 mr-20">
-            <img className="kocak mx-auto w-5/6" src={b} alt="gambar" />
-          </div>
-        </SwiperSlide>
-        <SwiperSlide style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-          <div className="w-3/4 mr-20">
-            <img className="kocak mx-auto w-5/6" src={c} alt="gambar" />
-          </div>
-        </SwiperSlide>
-        <SwiperSlide style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-          <div className="w-3/4 mr-20">
-            <img className="kocak mx-auto w-5/6" src={d} alt="gambar" />
-          </div>
-        </SwiperSlide>
-        <SwiperSlide style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-          <div className="w-3/4 mr-20">
-            <img className="kocak mx-auto w-5/6" src={e} alt="gambar" />
-          </div>
-        </SwiperSlide>
-        <SwiperSlide style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-          <div className="w-3/4 mr-20">
-            <img className="kocak mx-auto w-5/6" src={f} alt="gambar" />
-          </div>
-        </SwiperSlide>
-        <SwiperSlide style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-          <div className="w-3/4 mr-20">
-            <img className="kocak mx-auto w-5/6" src={g} alt="gambar" />
-          </div>
-        </SwiperSlide>
-        {/* Add more slides here */}
+        <Swiper
+          loop={true}
+          speed={800}
+          grabCursor={true}
+          autoplay={{
+            delay: 3000,
+            disableOnInteraction: false,
+            pauseOnMouseEnter: true,
+          }}
+          pagination={{ el: ".hero-dots", clickable: true }}
+          navigation={{ prevEl: ".hero-prev", nextEl: ".hero-next" }}
+          modules={[Autoplay, Pagination, Navigation]}
+          className="overflow-hidden rounded-2xl shadow-2xl shadow-black/40"
+        >
+          {movies.map((movie) => (
+            <SwiperSlide key={movie.id}>
+              <div className="relative aspect-[21/9] w-full cursor-pointer overflow-hidden text-left" onClick={() => openDetail(movie)}>
+                <img className="hero-slide-img h-full w-full object-cover" src={`${BACKDROP_URL}${movie.backdrop_path}`} alt={movie.title} draggable={false} />
+                <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/40 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
+                <div className="hero-slide-text absolute bottom-0 left-0 max-w-xl p-6 pb-8 text-white md:p-10 md:pb-12">
+                  <span className="inline-block rounded-full bg-white/15 px-3 py-1 text-xs font-medium backdrop-blur">
+                    ★ {movie.vote_average.toFixed(1)}
+                    {movie.release_date ? ` · ${movie.release_date.slice(0, 4)}` : ""}
+                  </span>
+                  <h2 className="mt-2 text-2xl font-bold leading-tight md:text-4xl">{movie.title}</h2>
+                  <p className="mt-2 hidden text-sm text-gray-200 md:line-clamp-3 md:block">{movie.overview}</p>
+                  <button className="mt-4 rounded-lg bg-blue-500 px-5 py-2 text-sm font-medium transition hover:bg-blue-600">Lihat Detail</button>
+                </div>
+              </div>
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      </div>
 
-        {/* Navigation arrows */}
-        <div className="absolute top-1/2 transform -translate-y-1/2 left-56 -translate-x-8 z-10">
-          <div className="swiper-button-prev" />
-        </div>
-        <div className="absolute top-1/2 transform -translate-y-1/2 right-80 translate-x-8 z-10">
-          <div className="swiper-button-next" />
-        </div>
-      </Swiper>
+      <div className="hero-dots" />
     </div>
   );
 }

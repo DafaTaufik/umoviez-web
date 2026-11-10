@@ -236,3 +236,26 @@
     width: 50%;
 }
 
+
+/* Layout kartu tim: responsif, rata tengah, ada jarak kiri-kanan */
+#model3 .members {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-left: 0;
+  width: 100%;
+}
+#model3 .gabunganPoto {
+  width: 100%;
+}
+#model3 .member {
+  flex: 1 1 20rem;
+  width: 100%;
+  max-width: 30rem;
+  margin: 0;
+}
+#model3 .member img {
+  max-width: calc(100% - 3rem);
+  height: auto;
+}
