@@ -1,8 +1,8 @@
 import DetailCom from "../components/DetailCom";
-const Detail = () => {
+const Detail = ({ type }) => {
 
 return (
-    <DetailCom/>
+    <DetailCom type={type} />
 )
 }
 export default Detail ;

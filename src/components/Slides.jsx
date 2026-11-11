@@ -32,9 +32,7 @@ export default function Slides() {
   }, []);
 
   const openDetail = (movie) => {
-    navigate(
-      `/detail?poster=${encodeURIComponent(movie.poster_path)}&title=${encodeURIComponent(movie.title)}&video=&rating=${encodeURIComponent(movie.vote_average)}&overview=${encodeURIComponent(movie.overview)}&date=${encodeURIComponent(movie.release_date)}&background=${encodeURIComponent(movie.backdrop_path)}&id=${encodeURIComponent(movie.id)}`,
-    );
+    navigate(`/detail/${movie.id}`);
   };
 
   if (movies.length === 0) {

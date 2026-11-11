@@ -9,9 +9,7 @@ const Search = () => {
   const navigate = useNavigate();
 
   const handleSearchClick = (movie, videoLink) => {
-    navigate(
-      `/detail?poster=${encodeURIComponent(movie.poster_path)}&title=${encodeURIComponent(movie.title)}&video=${encodeURIComponent(videoLink)}&rating=${encodeURIComponent(movie.vote_average)}&overview=${encodeURIComponent(movie.overview)}&date=${encodeURIComponent(movie.release_date)}&background=${encodeURIComponent(movie.backdrop_path)}&id=${encodeURIComponent(movie.id)}`,
-    );
+    navigate(`/detail/${movie.id}`);
   };
 
   useEffect(() => {

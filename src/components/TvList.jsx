@@ -60,9 +60,7 @@ const TvList = () => {
     return popularMovies.map((movie, i) => {
       const link = videoLinks[i];
       const handleSearchClick = () => {
-        navigate(
-          `/detail?poster=${encodeURIComponent(movie.poster_path)}&title=${encodeURIComponent(movie.name)}&rating=${encodeURIComponent(movie.vote_average)}&overview=${encodeURIComponent(movie.overview)}&date=${encodeURIComponent(movie.first_air_date)}&background=${encodeURIComponent(movie.backdrop_path)}&id=${encodeURIComponent(movie.id)}&video=${encodeURIComponent(link)}`,
-        );
+        navigate(`/detail/tv/${movie.id}`);
       };
 
       return (

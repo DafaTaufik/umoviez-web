@@ -14,6 +14,8 @@ return(
       <Route path = "/search" element={<SearchPage />} />
       <Route path = "/AboutUs" element={<AboutUs />} />
       <Route path = "/Detail" element={< Detail/>} />
+      <Route path = "/detail/:id" element={<Detail />} />
+      <Route path = "/detail/tv/:id" element={<Detail type="tv" />} />
       <Route path = "/Tv" element={< Tv/>} />
     </Routes>
   </Router>

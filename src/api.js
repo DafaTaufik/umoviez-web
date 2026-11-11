@@ -45,6 +45,14 @@ export const getTrendingMovieList = async () => {
     const trending = await axios.get(`${baseUrl}/trending/movie/week?api_key=${apiKey}`);
     return trending.data.results
 }
+export const getDetail = async (type, id) => {
+    const detail = await axios.get(`${baseUrl}/${type}/${encodeURIComponent(id)}?api_key=${apiKey}&append_to_response=videos`);
+    return detail.data
+}
+export const pickTrailerKey = (videos = []) => {
+    const youtube = videos.filter((video) => video.site === "YouTube");
+    return (youtube.find((video) => video.type === "Trailer") || youtube[0])?.key || null
+}
 export const getTime = async () => {
     const time = await axios.get ('https://timeapi.io/api/Time/current/zone?timeZone=ASIA/Jakarta');
     return time.data
