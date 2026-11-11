@@ -71,7 +71,7 @@ const Main = () => {
       <div className="group h-screen flex mx-0 my-0 px-0 py-0 ">
         <Sidebar />
         <div className=" tengah mt-4 pt-2 pl-2 w-full overflow-x-hidden">
-          <div id="dashboard" className="  atas flex row justify-center mb-3 items-center gap-0.5 ">
+          <div id="dashboard" className="  atas flex flex-col md:flex-row justify-center mb-3 items-center gap-2 md:gap-0.5 ">
             <div className=" ml-0 flex row">
               <img className="w-8" src={logo} alt="logo" />
               <h1
@@ -81,25 +81,25 @@ const Main = () => {
                 Moviez
               </h1>
             </div>
-            <div className=" ml-14  text-white">
+            <div className=" md:ml-14 text-center md:text-left text-white">
               <Time />
             </div>
           </div>
           <Slides />
           <div className="Card-container text-center font-poppins text-base">
-            <h1 className="text-2xl text-left ml-16 mb-1 mt-0">Popular</h1>
+            <h1 className="text-2xl text-left ml-4 md:ml-16 mb-1 mt-0">Popular</h1>
             <Popularlist popularMovies={popularMovies} />
 
-            <h1 id="upcoming" className="text-2xl text-left ml-16 mb-1 mt-0">
+            <h1 id="upcoming" className="text-2xl text-left ml-4 md:ml-16 mb-1 mt-0">
               Up Coming
             </h1>
             <UpComing upcomingMovies={upcomingMovies} />
 
-            <h1 id="toprated" className="text-2xl text-left ml-16 mb-1 mt-0">
+            <h1 id="toprated" className="text-2xl text-left ml-4 md:ml-16 mb-1 mt-0">
               Top Rated
             </h1>
             <TopRated topratedMovies={topratedMovies} />
-            <h1 id="nowplaying" className="text-2xl text-left ml-16 mb-1 mt-0">
+            <h1 id="nowplaying" className="text-2xl text-left ml-4 md:ml-16 mb-1 mt-0">
               Now Playing
             </h1>
             <NowMovie nowMovies={nowMovies} />

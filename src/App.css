@@ -84,7 +84,7 @@ h1{
   text-align: center;
 }
 .kotak .slick-slide .Card-movie {
-  width: 100%;
+  width: calc(100% - 0.75rem);
   max-width: 12rem;
   margin: 0 auto;
 }
@@ -263,3 +263,13 @@ font-weight: bold;
 width: 475px;
 }
  END OF CARD STYLE */
+/* Mobile: geser dengan jari, arrow list film disembunyikan dan area list dilebarkan */
+@media (max-width: 767px) {
+  .kotak {
+    width: 96%;
+  }
+  .kotak .slick-prev,
+  .kotak .slick-next {
+    display: none !important;
+  }
+}

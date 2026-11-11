@@ -31,7 +31,8 @@ export const useSliderSettings = () => {
     return () => observer.disconnect();
   }, []);
 
-  return [ref, { ...sliderSettings, slidesToShow }];
+  // Satu klik arrow menggeser satu "halaman" penuh, sebanyak kartu yang terlihat
+  return [ref, { ...sliderSettings, slidesToShow, slidesToScroll: slidesToShow }];
 };
 
 export default sliderSettings;

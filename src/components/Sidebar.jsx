@@ -50,6 +50,7 @@ const Sidebar = () => {
   // Di halaman utama: scroll ke section. Di halaman lain: pindah ke halaman utama lalu scroll (ditangani Main)
   const goToSection = (menu, id) => {
     setActiveMenu(menu);
+    if (window.innerWidth < 768) setOpen(false); // drawer mobile menutup setelah memilih menu
     if (pathname === "/") {
       document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
     } else {
@@ -68,12 +69,25 @@ const Sidebar = () => {
   const scrollToNowPlaying = () => goToSection("Now Playing", "nowplaying");
 
   return (
-    <div className="aside">
-      <div className={`${open ? "w-52" : "w-16 bg-dark-purple opacity-0.5"} bg-dark-purple h-screen pl-3.5 pt-8 relative duration-300 ${!open && "opacity-75"}`}>
+    <div className="aside max-md:fixed max-md:left-0 max-md:top-0 max-md:z-50">
+      {/* Mobile: sidebar jadi drawer. Tombol menu mengambang + latar gelap yang menutup drawer saat diklik */}
+      {!open && (
+        <button
+          className="fixed left-3 top-3 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-dark-purple text-white shadow-lg ring-1 ring-white/20 md:hidden"
+          onClick={() => setOpen(true)}
+          aria-label="Buka menu"
+        >
+          <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" aria-hidden="true">
+            <path d="M4 7h16M4 12h16M4 17h16" />
+          </svg>
+        </button>
+      )}
+      {open && <div className="fixed inset-0 bg-black/60 md:hidden" onClick={() => setOpen(false)} />}
+      <div className={`${open ? "w-52" : "w-16 bg-dark-purple opacity-0.5 max-md:w-52 max-md:-translate-x-full"} bg-dark-purple h-screen pl-3.5 pt-8 relative z-10 duration-300 ${!open && "opacity-75"}`}>
         <img
           src={More}
           className={`absolute cursor-pointer -right-3 top-9 w-7 border-dark-purple
-             border-2 rounded-full ${!open && "rotate-180"}`}
+             border-2 rounded-full ${!open && "rotate-180 max-md:hidden"}`}
           onClick={() => setOpen(!open)}
           alt="Toggle Button"
         />
