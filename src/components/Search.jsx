@@ -53,7 +53,7 @@ const Search = () => {
           <div className="p-4">
             <h2 className="text-lg font-semibold text-white">{movie.title}</h2>
             <p className="text-gray-300">Release date: {movie.release_date} </p>
-            <p className="text-gray-300">Movie Rating: {movie.vote_average}</p>
+            <p className="text-gray-300">Movie Rating: {movie.vote_average?.toFixed(1)}</p>
             {link && (
               <div className="mt-4">
                 <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick={() => window.open(`https://youtube.com/watch?v=${link}`, "_blank")}>
